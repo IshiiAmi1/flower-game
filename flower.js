@@ -1,3 +1,5 @@
+let canvasx;
+let canvasy;
 let pushtimer;
 let count;
 let limit;
@@ -23,7 +25,9 @@ function move(){
 }
 
 function setup() {
-  createCanvas(400, 400);
+  canvasx=375;
+  canvasy=667
+  createCanvas(canvasx, canvasy);
   pushtimer=0;
   count=0;
   limit=0;
@@ -52,4 +56,3 @@ function draw() {
 
   text('残り'+limit+'秒', 170, 70);
 }
-    
