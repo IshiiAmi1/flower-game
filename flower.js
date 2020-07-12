@@ -2,28 +2,47 @@ let canvasx;
 let canvasy;
 let count;
 let limit;
-let timer
+let timer;
+let pushtimer;
 let x;
 let y;
 let vx;
 let vy;
 let seedx,seedy;
 let seed1;
+let gameState;
+let image1;
 
+function preload(){
+  image1=loadImage('image/hanasakajiisan.png');
+}
 
 function move(){
-    if(timer==120){
+
+  if(vx<60){
+    x=random(5);
+  }else if(vx>canvasx-60){
     x=-5+random(5);
-    y=-3+random(3);
-    }
+  }else if(vy<60){
+    y=random(5);
+  }else if(vy>canvasy-60){
+    y=-5+random(5);
+  }else{
+
+  }
+  if(timer==120){
+    x=-5+random(5);
+    y=-5+random(5);
+  }
   if(timer==240){
-     x=random(5);
-     y=random(3);
+    x=random(5);
+    y=random(5);
     timer=0;
-    }
+  }
   vx+=x;
   vy+=y;
-  rect(vx, vy, 20, 20);
+  image(image1,vx,vy,90,90);
+  //rect(vx, vy, 20, 20);
 }
 
 /*
@@ -48,6 +67,14 @@ function seed(){
   }
 }
 
+function drawResultScreen() {
+  background(0, 192); // 透明度 192 の黒
+  fill(255);
+  textSize(64);
+  textAlign(CENTER, CENTER); // 横に中央揃え ＆ 縦にも中央揃え
+  text("RESULT", width / 2, height / 2); // 画面中央にテキスト表示
+}
+
 function setup() {
   canvasx=375;
   canvasy=667;
@@ -56,8 +83,8 @@ function setup() {
   count=0;
   limit=0;
   timer=0;
-  x=3;
-  y=1;
+  x=4;
+  y=3;
   vx=0;
   vy=0;
   seedx=[];
@@ -72,13 +99,19 @@ function draw() {
     move();
   if(mouseIsPressed==true){
     seed();
+    pushtimer++;
     fill(0,0,255);
-    if(timer==60){
+    if(pushtimer==60){
       count++;
-      timer=0;
+      pushtimer=0;
     }
     }
   limit=10-count;
+
+  if(limit==0){
+    gameState="gameover";
+    drawResultScreen();
+  }
 
   text('残り'+limit+'秒', 170, 70);
 }
