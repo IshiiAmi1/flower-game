@@ -67,18 +67,23 @@ function seed(){
   }
 }
 
+function mouseReleased(){
+  
+}
+
 function drawResultScreen() {
   background(0, 192); // 透明度 192 の黒
   fill(255);
   textSize(64);
   textAlign(CENTER, CENTER); // 横に中央揃え ＆ 縦にも中央揃え
   text("RESULT", width / 2, height / 2); // 画面中央にテキスト表示
+  text("Tap to restart")
+  if(mouseIsPressed==1){
+    resetgame();
+  }
 }
 
-function setup() {
-  canvasx=375;
-  canvasy=667;
-  createCanvas(canvasx, canvasy);
+function resetgame(){
   pushtimer=0;
   count=0;
   limit=0;
@@ -90,6 +95,13 @@ function setup() {
   seedx=[];
   seedy=[];
   seed1=[];
+}
+
+function setup() {
+  canvasx=375;
+  canvasy=667;
+  createCanvas(canvasx, canvasy);
+  resetgame();
 }
 
 function draw() {
@@ -108,9 +120,11 @@ function draw() {
     }
   limit=10-count;
 
-  if(limit==0){
-    gameState="gameover";
-    drawResultScreen();
+  if(limit<=0){
+    if(mouseReleased==1){
+       gameState="gameover";
+       drawResultScreen();
+    }
   }
 
   text('残り'+limit+'秒', 170, 70);
