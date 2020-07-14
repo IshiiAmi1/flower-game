@@ -60,7 +60,7 @@ function seed(){
     for(i=0;i<100;i++){
       seedx[i]+=-8+random(8);
       seedy[i]+=-8+random(8);
-      seed1[i]=rect(seedx,seedy,20,20);
+      seed1[i]=rect(seedx[i],seedy[i],20,20);
     }
     //x+=seedx[i];
     //y+=seedy[i];
@@ -79,7 +79,7 @@ function drawResultScreen() {
   text("RESULT", width / 2, height / 2); // 画面中央にテキスト表示
   text("Tap to restart")
   if(mouseIsPressed==1){
-    resetgame();
+    gameState="reset";
   }
 }
 
@@ -121,10 +121,13 @@ function draw() {
   limit=10-count;
 
   if(limit<=0){
-    if(mouseReleased==1){
-       gameState="gameover";
-       drawResultScreen();
-    }
+    gameState="gameover";
+       
+  }
+  if(gameState=="gameover"){
+    drawResultScreen();
+  }else if(gameState=="reset"){
+    resetgame();
   }
 
   text('残り'+limit+'秒', 170, 70);
