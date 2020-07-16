@@ -1,6 +1,7 @@
 let canvasx;
 let canvasy;
 let count;
+let maxtime;
 let limit;
 let timer;
 let pushtimer;
@@ -8,13 +9,16 @@ let x;
 let y;
 let vx;
 let vy;
+let seedtimer;
 let seedx,seedy;
+let movex,movey;
 let seed1;
 let gameState;
 let image1;
 
 function preload(){
   image1=loadImage('image/hanasakajiisan.png');
+  image2=loadImage('image/flower.png');
 }
 
 function move(){
@@ -42,43 +46,34 @@ function move(){
   vx+=x;
   vy+=y;
   image(image1,vx,vy,90,90);
-  //rect(vx, vy, 20, 20);
+  
 }
-
-/*
-function drawseed(particle) {
-  push();
-  noStroke();
-  fill(255);
-  square(particle.x, particle.y, 10);
-  pop();
-}
-*/
 
 function seed(){
-  if(timer==20){
+    seedtimer++;
     for(i=0;i<100;i++){
-      seedx[i]+=-8+random(8);
-      seedy[i]+=-8+random(8);
-      seed1[i]=rect(seedx[i],seedy[i],20,20);
-    }
-    //x+=seedx[i];
-    //y+=seedy[i];
+      seedx[i]=-8+random(8);
+      seedy[i]=-8+random(8);
+      movex=vx;
+      movey=vy;
+      movex+=seedx[i];
+      movey+=seedy[i];
+      seed1[i]=rect(movex,movey,7,7);
+      if(seedtimer==20){
+        seedtimer=0;
+        image(image2,movex,movey,10,10);
+    } 
   }
-}
-
-function mouseReleased(){
-  
 }
 
 function drawResultScreen() {
   background(0, 192); // 透明度 192 の黒
   fill(255);
-  textSize(64);
+  textSize(30);
   textAlign(CENTER, CENTER); // 横に中央揃え ＆ 縦にも中央揃え
   text("RESULT", width / 2, height / 2); // 画面中央にテキスト表示
-  text("Tap to restart")
-  if(mouseIsPressed==1){
+  text("Tap to restart",width / 2, height / 4)
+  if(mouseIsPressed==true){
     gameState="reset";
   }
 }
@@ -86,6 +81,7 @@ function drawResultScreen() {
 function resetgame(){
   pushtimer=0;
   count=0;
+  maxtime=3;
   limit=0;
   timer=0;
   x=4;
@@ -95,6 +91,7 @@ function resetgame(){
   seedx=[];
   seedy=[];
   seed1=[];
+  gameState="play";
 }
 
 function setup() {
@@ -110,6 +107,7 @@ function draw() {
     timer++;
     move();
   if(mouseIsPressed==true){
+    seedtimer++;
     seed();
     pushtimer++;
     fill(0,0,255);
@@ -118,9 +116,9 @@ function draw() {
       pushtimer=0;
     }
     }
-  limit=10-count;
+  limit=maxtime-count;
 
-  if(limit<=0){
+  if(limit==0){
     gameState="gameover";
        
   }
@@ -128,7 +126,9 @@ function draw() {
     drawResultScreen();
   }else if(gameState=="reset"){
     resetgame();
+  }else{
+    text('残り'+limit+'秒', 170, 70);
   }
 
-  text('残り'+limit+'秒', 170, 70);
+
 }
