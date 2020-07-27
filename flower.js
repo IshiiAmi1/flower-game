@@ -13,21 +13,25 @@ let seedtimer;
 let seedx,seedy;
 let movex,movey;
 let seed1;
+let seed2;
 let gameState;
 let image1;
+let image2;
+let image3;
 
 function preload(){
   image1=loadImage('image/hanasakajiisan.png');
   image2=loadImage('image/flower.png');
+  image3=loadImage('image/seed.png')
 }
 
 function move(){
 
-  if(vx<60){
+  if(vx<-20){
     x=random(5);
   }else if(vx>canvasx-60){
     x=-5+random(5);
-  }else if(vy<60){
+  }else if(vy<-20){
     y=random(5);
   }else if(vy>canvasy-60){
     y=-5+random(5);
@@ -49,6 +53,7 @@ function move(){
   
 }
 
+/*
 function seed(){
     seedtimer++;
     for(i=0;i<100;i++){
@@ -65,6 +70,7 @@ function seed(){
     } 
   }
 }
+*/
 
 function drawResultScreen() {
   background(0, 192); // 透明度 192 の黒
@@ -81,7 +87,7 @@ function drawResultScreen() {
 function resetgame(){
   pushtimer=0;
   count=0;
-  maxtime=3;
+  maxtime=10;
   limit=0;
   timer=0;
   x=4;
@@ -107,8 +113,9 @@ function draw() {
     timer++;
     move();
   if(mouseIsPressed==true){
-    seedtimer++;
-    seed();
+    seed1.push(new seed(vx,vy));
+    for(let i=0;i<seed1.length;i++) seed1[i].update(image3,image2);
+    for(let i=0;i<seed1.length;i++) seed1[i].draw();
     pushtimer++;
     fill(0,0,255);
     if(pushtimer==60){
