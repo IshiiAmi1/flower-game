@@ -10,9 +10,6 @@ let y;
 let vx;
 let vy;
 let seedtimer;
-let seedx,seedy;
-let movex,movey;
-let lastx,lasty;
 let seeds;
 let flowers;
 let gameState;
@@ -92,19 +89,49 @@ function drawResultScreen() {
 function resetgame(){
   pushtimer=0;
   count=0;
-  maxtime=10;
+  maxtime=3;
   limit=0;
   timer=0;
   x=4;
   y=3;
   vx=0;
   vy=0;
-  seedx=[];
-  seedy=[];
   seeds=[];
   flowers=[];
   seedtimer=0;
+  textSize(15);
   gameState="play";
+}
+
+function playgame(){
+    timer++;
+    move();
+     for(let i=seeds.length-1;i>=0;i--) {
+        seeds[i].update(image3,image2);
+        if(seeds[i].kill) seeds.splice(i,1);
+     //   if(seeds[i].flag==1) flowers.push(new flower(seeds[i].x,seeds[i].y));
+    }
+    text("seednum:"+seeds.length,101,10);
+    for(let i=0;i<seeds.length;i++) seeds[i].draw();
+    for(let i=0;i<flowers.length;i++) flowers[i].draw(image2);
+    if(mouseIsPressed==true){
+        seedtimer++;
+        if(seedtimer==5){
+            seeds.push(new seed(vx,vy));
+            seedtimer=0;
+        }
+        pushtimer++;
+        fill(0,0,255);
+        if(pushtimer==60){
+            count++;
+            pushtimer=0;
+        }
+    }
+    limit=maxtime-count;
+
+    if(limit==0){
+        gameState="gameover";   
+    }
 }
 
 function setup() {
@@ -117,39 +144,16 @@ function setup() {
 function draw() {
   background(220);
     fill(0);
-    timer++;
-    move();
-    for(let i=seeds.length-1;i>=0;i--) {
-        seeds[i].update(image3,image2);
-        if(seeds[i].kill) seeds.splice(i,1);
-       //if(seeds)
-    }
-    text("seednum:"+seeds.length,101,10);
-    for(let i=0;i<seeds.length;i++) seeds[i].draw();
-  if(mouseIsPressed==true){
-    seedtimer++;
-      if(seedtimer==5){
-    seeds.push(new seed(vx,vy));
-          seedtimer=0;
-      }
-    pushtimer++;
-    fill(0,0,255);
-    if(pushtimer==60){
-      count++;
-      pushtimer=0;
-    }
-    }
-  limit=maxtime-count;
-
-  if(limit==0){
-    gameState="gameover";
-       
-  }
+   
+   
   if(gameState=="gameover"){
-    drawResultScreen();
+      if(mouseIsPressed==false){
+       drawResultScreen();
+      }
   }else if(gameState=="reset"){
     resetgame();
   }else{
+      playgame();
     text('残り'+limit+'秒', 170, 70);
   }
 
