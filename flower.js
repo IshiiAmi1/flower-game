@@ -12,6 +12,7 @@ let vy;
 let seedtimer;
 let seedx,seedy;
 let movex,movey;
+let lastx,lasty;
 let seed1;
 let seed2;
 let gameState;
@@ -84,6 +85,10 @@ function drawResultScreen() {
   }
 }
 
+//function randomnum(){
+  //  switch 
+//}
+
 function resetgame(){
   pushtimer=0;
   count=0;
@@ -97,6 +102,7 @@ function resetgame(){
   seedx=[];
   seedy=[];
   seed1=[];
+  seedtimer=0;
   gameState="play";
 }
 
@@ -112,10 +118,18 @@ function draw() {
     fill(0);
     timer++;
     move();
-  if(mouseIsPressed==true){
-    seed1.push(new seed(vx,vy));
-    for(let i=0;i<seed1.length;i++) seed1[i].update(image3,image2);
+    for(let i=seed1.length-1;i>=0;i--) {
+        seed1[i].update(image3,image2);
+        if(seed1[i].kill) seed1.splice(i,1);
+        text("seednum:"+seed1.length,101,10);
+    }
     for(let i=0;i<seed1.length;i++) seed1[i].draw();
+  if(mouseIsPressed==true){
+    seedtimer++;
+      if(seedtimer==5){
+    seed1.push(new seed(vx,vy));
+          seedtimer=0;
+      }
     pushtimer++;
     fill(0,0,255);
     if(pushtimer==60){
