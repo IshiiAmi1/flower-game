@@ -22,7 +22,7 @@ class seed{
             //this.lastx=this.x;
             //this.lasty=this.y;
             //this.seedtimer++;
-            if(this.life<=0) this.flag=1;
+            if(this.life==0) this.flag=1;
         if(this.life<=0) this.kill=true;
         if(this.x<0 || this.x>canvasx || this.y<0 || this.y>canvasy) this.kill=true;
 

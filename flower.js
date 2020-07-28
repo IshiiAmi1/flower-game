@@ -13,8 +13,8 @@ let seedtimer;
 let seedx,seedy;
 let movex,movey;
 let lastx,lasty;
-let seed1;
-let seed2;
+let seeds;
+let flowers;
 let gameState;
 let image1;
 let image2;
@@ -101,7 +101,8 @@ function resetgame(){
   vy=0;
   seedx=[];
   seedy=[];
-  seed1=[];
+  seeds=[];
+  flowers=[];
   seedtimer=0;
   gameState="play";
 }
@@ -118,16 +119,17 @@ function draw() {
     fill(0);
     timer++;
     move();
-    for(let i=seed1.length-1;i>=0;i--) {
-        seed1[i].update(image3,image2);
-        if(seed1[i].kill) seed1.splice(i,1);
-        text("seednum:"+seed1.length,101,10);
+    for(let i=seeds.length-1;i>=0;i--) {
+        seeds[i].update(image3,image2);
+        if(seeds[i].kill) seeds.splice(i,1);
+       //if(seeds)
     }
-    for(let i=0;i<seed1.length;i++) seed1[i].draw();
+    text("seednum:"+seeds.length,101,10);
+    for(let i=0;i<seeds.length;i++) seeds[i].draw();
   if(mouseIsPressed==true){
     seedtimer++;
       if(seedtimer==5){
-    seed1.push(new seed(vx,vy));
+    seeds.push(new seed(vx,vy));
           seedtimer=0;
       }
     pushtimer++;
