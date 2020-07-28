@@ -1,6 +1,7 @@
 let canvasx;
 let canvasy;
 let count;
+let truecount;
 let maxtime;
 let limit;
 let timer;
@@ -78,7 +79,10 @@ function drawResultScreen() {
   text("RESULT", width / 2, height / 2); // 画面中央にテキスト表示
   text("Tap to restart",width / 2, height / 4)
   if(mouseIsPressed==true){
-    gameState="reset";
+      truecount++;
+      if(truecount==20){
+          gameState="reset";  
+      }
   }
 }
 
@@ -89,6 +93,7 @@ function drawResultScreen() {
 function resetgame(){
   pushtimer=0;
   count=0;
+  truecount=0;
   maxtime=3;
   limit=0;
   timer=0;
@@ -109,7 +114,7 @@ function playgame(){
      for(let i=seeds.length-1;i>=0;i--) {
         seeds[i].update(image3,image2);
         if(seeds[i].kill) seeds.splice(i,1);
-     //   if(seeds[i].flag==1) flowers.push(new flower(seeds[i].x,seeds[i].y));
+     // if(seeds[i].life==0) flowers.push(new flower(seeds[i].x,seeds[i].y));
     }
     text("seednum:"+seeds.length,101,10);
     for(let i=0;i<seeds.length;i++) seeds[i].draw();
@@ -147,9 +152,10 @@ function draw() {
    
    
   if(gameState=="gameover"){
-      if(mouseIsPressed==false){
+      //if(mouseIsPressed==false){
+          
        drawResultScreen();
-      }
+      //}
   }else if(gameState=="reset"){
     resetgame();
   }else{
