@@ -77,9 +77,10 @@ function drawResultScreen() {
   textSize(30);
   textAlign(CENTER, CENTER); // 横に中央揃え ＆ 縦にも中央揃え
   text("RESULT", width / 2, height / 2); // 画面中央にテキスト表示
-   // resulr=
-  //text(result,width/2,height/3);
-  text("Tap to restart",width / 2, height / 4)
+  text("Tap to restart",width / 2, height / 4);
+  result=((30*30)*flowers.length)/(canvasx*canvasy)*100;    
+    textSize(40);
+  text(result.toFixed()+"%",width/2,height/2+100);
   if(mouseIsPressed==true){
       truecount++;
       if(truecount==20){
@@ -96,7 +97,7 @@ function resetgame(){
   pushtimer=0;
   count=0;
   truecount=0;
-  maxtime=8;
+  maxtime=1;
   limit=0;
   timer=0;
   x=4;
@@ -112,7 +113,7 @@ function resetgame(){
 
 function playgame(){
     timer++;
-    move();
+    
      for(let i=seeds.length-1;i>=0;i--) {
         seeds[i].update(image3,image2);
          //if(seeds[i].state){text("111",100,100);flowers.push(new flower(seeds[i].x,seeds[i].y));}
@@ -129,6 +130,7 @@ function playgame(){
     for(let i=0;i<seeds.length;i++) seeds[i].draw();
     for(let i=0;i<flowers.length;i++) flowers[i].draw(image2);
      text("flowernum:"+flowers.length,101,50);
+    move();
     if(mouseIsPressed==true){
         seedtimer++;
         if(seedtimer==5){

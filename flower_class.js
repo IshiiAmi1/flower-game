@@ -22,7 +22,7 @@ class seed{
             this.lasty=this.y;
           }*/
         if(this.life<0) this.kill=true; 
-        if(this.x<0 || this.x>canvasx || this.y<0 || this.y>canvasy) this.kill1=true;
+        if(this.x<-15 || this.x>canvasx-15 || this.y<-15 || this.y>canvasy-15) this.kill1=true;
 
     }
     draw(){
