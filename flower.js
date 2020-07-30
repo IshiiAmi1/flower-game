@@ -94,7 +94,7 @@ function resetgame(){
   pushtimer=0;
   count=0;
   truecount=0;
-  maxtime=3;
+  maxtime=8;
   limit=0;
   timer=0;
   x=4;
@@ -113,12 +113,16 @@ function playgame(){
     move();
      for(let i=seeds.length-1;i>=0;i--) {
         seeds[i].update(image3,image2);
-        if(seeds[i].kill) seeds.splice(i,1);
-     // if(seeds[i].life==0) flowers.push(new flower(seeds[i].x,seeds[i].y));
+         //if(seeds[i].state){text("111",100,100);flowers.push(new flower(seeds[i].x,seeds[i].y));}
+        if(seeds[i].kill) {
+            flowers.push(new flower(seeds[i].x,seeds[i].y));
+            seeds.splice(i,1);
+        }
     }
     text("seednum:"+seeds.length,101,10);
     for(let i=0;i<seeds.length;i++) seeds[i].draw();
     for(let i=0;i<flowers.length;i++) flowers[i].draw(image2);
+     text("flowernum:"+flowers.length,101,50);
     if(mouseIsPressed==true){
         seedtimer++;
         if(seedtimer==5){
@@ -150,12 +154,8 @@ function draw() {
   background(220);
     fill(0);
    
-   
   if(gameState=="gameover"){
-      //if(mouseIsPressed==false){
-          
-       drawResultScreen();
-      //}
+      drawResultScreen();
   }else if(gameState=="reset"){
     resetgame();
   }else{

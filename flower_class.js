@@ -6,6 +6,7 @@ class seed{
         this.vx=-2+random(5);
         this.vy=-2+random(5);
         this.kill=false;
+        this.state=false;
     }
     update(seedimage,flowerimage){
         this.seedimage=seedimage;
@@ -14,8 +15,12 @@ class seed{
             this.x+=this.vx;
             this.vy-1;
             this.y+=this.vy;
-            if(this.life==0)  flowers.push(new flower(this.x,this.y));
-        if(this.life<0) this.kill=true;
+          //  if(this.life<0){ this.flag=1;}
+          if(this.life==0){this.state=true;
+            this.lastx=this.x;
+            this.lasty=this.y;
+          }
+        if(this.life<0) {this.kill=true; }
         if(this.x<0 || this.x>canvasx || this.y<0 || this.y>canvasy) this.kill=true;
 
     }
@@ -24,6 +29,7 @@ class seed{
         if(! this.kill){
         image(this.seedimage,this.x,this.y,20,20);
         }   
+        //if(this.state){text("test222",101,310);  flowers.push(new flower(this.x,this.y));}
     }
 }
 
@@ -31,7 +37,6 @@ class flower{
     constructor(seedx,seedy){
         this.x=seedx;
         this.y=seedy;
-         text("test222",101,310);
     }
     draw(flowerimage){
         this.image=flowerimage;
