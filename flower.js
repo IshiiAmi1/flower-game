@@ -77,6 +77,8 @@ function drawResultScreen() {
   textSize(30);
   textAlign(CENTER, CENTER); // 横に中央揃え ＆ 縦にも中央揃え
   text("RESULT", width / 2, height / 2); // 画面中央にテキスト表示
+    resulr=
+  text(result,width/2,height/3);
   text("Tap to restart",width / 2, height / 4)
   if(mouseIsPressed==true){
       truecount++;
@@ -114,10 +116,14 @@ function playgame(){
      for(let i=seeds.length-1;i>=0;i--) {
         seeds[i].update(image3,image2);
          //if(seeds[i].state){text("111",100,100);flowers.push(new flower(seeds[i].x,seeds[i].y));}
+         if(seeds[i].kill1){
+            seeds.splice(i,1);
+        }
         if(seeds[i].kill) {
             flowers.push(new flower(seeds[i].x,seeds[i].y));
             seeds.splice(i,1);
         }
+        
     }
     text("seednum:"+seeds.length,101,10);
     for(let i=0;i<seeds.length;i++) seeds[i].draw();
