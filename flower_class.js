@@ -7,7 +7,7 @@ class seed{
         this.vy=-2+random(5);
         this.kill=false;
         this.kill1=false;
-        this.state=false;
+        //this.state=false;
     }
     update(seedimage,flowerimage){
         this.seedimage=seedimage;
@@ -21,7 +21,7 @@ class seed{
             this.lastx=this.x;
             this.lasty=this.y;
           }*/
-        if(this.life<=0) {this.kill=true; }
+        if(this.life<0) this.kill=true; 
         if(this.x<0 || this.x>canvasx || this.y<0 || this.y>canvasy) this.kill1=true;
 
     }
