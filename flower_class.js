@@ -12,7 +12,7 @@ class seed{
     update(seedimage,flowerimage){
         this.seedimage=seedimage;
         this.flowerimage=flowerimage;
-            this.life-=0.01;
+            this.life-=0.05;
             this.x+=this.vx;
             this.vy-1;
             this.y+=this.vy;
