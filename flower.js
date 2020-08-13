@@ -100,7 +100,7 @@ function startScreen(){
           text("〜戸赤のやまざくらゲーム〜", width / 2, height / 4); // 画面中央にテキスト表示
         textSize(20);
         text("たくさんの花を咲かせて下さい!",width / 2, height / 2);
-    }else if(state==1){
+    }else if(state<=20){
         text("~操作方法~",width / 2, height / 5);
         
         text("Tap している間種がまかれています。\n",width / 2, height / 3+50);
@@ -125,6 +125,22 @@ function resetgame(){
   vy=0;
   seeds=[];
   flowers=[];
+  //imagearray=new Array(Math.floor(canvasy/10)).fill(0);
+   
+   /* for(let i=0;i<canvasx;i++){
+        for(let j=0;j<canvasy;j++){
+            imagearray[i][j]=0;
+        }
+    }
+    */
+    var i, j;
+    imagearray = new Array(Math.round(canvasx/30));
+        for(i = 0; i < Math.round(canvasx/30); i++) {
+            imagearray[i] = new Array(Math.round(canvasy/30));
+            //for(j = 0; j < canvasy; j++) {
+            //imagearray[i][j] = 0;
+            //}
+        }
   seedtimer=0;
   textSize(15);
   gameState="play";
@@ -139,23 +155,33 @@ function playgame(){
         if(seeds[i].kill1){
             seeds.splice(i,1);
         }else if(seeds[i].kill) {
+            /*
             for(let j=0;j<flowers.length;j++){
                 if((seeds[i].x-flowers[j].x) <10 && (seeds[i].x-flowers[j].x) >-10 && (seeds[i].y-flowers[j].y)<10 && (seeds[i].y-flowers[j].y)>-10 ){
                     seeds[i].x+=35;
                     seeds[i].y+=35;
                 }
             }
-            flowers.push(new flower(seeds[i].x,seeds[i].y));
+            */
+            if(imagearray[Math.round((seeds[i].x)/30)][Math.round((seeds[i].y)/30)]!=1){
+                imagearray[Math.round((seeds[i].x)/30)][Math.round((seeds[i].y)/30)]=1;
+                flowers.push(new flower(seeds[i].x,seeds[i].y));
+                
+            }else{
+                //flowers.splice(i,1); 
+                text("test222",101,310);
+            }
             
+           // flowers.push(new flower(seeds[i].x,seeds[i].y));
             seeds.splice(i,1);
         }else{
         }
         
     }
-    //text("seednum:"+seeds.length,101,10);
+    text("seednum:"+seeds.length,101,10);
     for(let i=0;i<seeds.length;i++) seeds[i].draw();
     for(let i=0;i<flowers.length;i++) flowers[i].draw(image2);
-    //text("flowernum:"+flowers.length,101,50);
+    text("flowernum:"+flowers.length,101,50);
     move();
     if(mouseIsPressed==true){
         seedtimer++;
@@ -182,12 +208,8 @@ function setup() {
   canvasy=667;
   createCanvas(canvasx, canvasy);
   gameState="start";
-  imagearray[canvasx/10][canvasy/10];
-    for(let i=0;i<canvasx/10;i++){
-        for(let j=0;j<canvasy/10;j++){
-            imagearray[i][j]=0;
-        }
-    }
+  //imagearray=[];
+    
  // startScreen();
  // resetgame();
 }
