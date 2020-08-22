@@ -16,18 +16,13 @@ class seed{
             this.x+=this.vx;
             this.vy-1;
             this.y+=this.vy;
-          //  if(this.life<0){ this.flag=1;}
-          /*if(this.life==0){this.state=true;
-            this.lastx=this.x;
-            this.lasty=this.y;
-          }*/
+         
         if(this.life<0) this.kill=true; 
         if(this.x<-15 || this.x>canvasx-15 || this.y<130 || this.y>canvasy-15) this.kill1=true;
       //  if(this.kill && this.y<130) this.kill2=true;
     }
     draw(){
-        //text("test222",101,310);
-        
+     
         if(! this.kill){
         image(this.seedimage,this.x,this.y,40,40);
         }   

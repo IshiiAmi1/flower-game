@@ -104,7 +104,7 @@ function startScreen(){
           textSize(30);
           text("〜戸赤のやまざくらゲーム〜", width / 2, height / 4); // 画面中央にテキスト表示
         textSize(20);
-        text("たくさんの花を咲かせて下さい!",width / 2, height / 2);
+        text("たくさんの花を咲かせて下さい!\n\n\n\n✳︎音が出ます音量注意",width / 2, height / 2);
     }else if(state<=20){
         fill(255,100,255)
         text("~操作方法~",width / 2, height / 5);
@@ -201,6 +201,10 @@ function playgame(){
     if(limit==0 || SEEDNUM==0){
         gameState="gameover";   
     }
+}
+
+function audio(){
+    
 }
 
 function setup() {

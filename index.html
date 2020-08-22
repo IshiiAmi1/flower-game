@@ -7,5 +7,19 @@
     <script src="flower_class.js"></script>
   </head>
   <body>
+      
+      
+      <audio id="song" loop>
+       <source src="songs/bgm_maoudamashii_8bit29.mp3">
+      </audio>
+      
+      <script>
+      document.addEventListener('click',play);
+          
+          function play(){
+              document.getElementById('song').play();
+              document.removeEventListener('click',play);
+          }
+      </script>
   </body>
 </html>
