@@ -67,6 +67,7 @@ function drawResultScreen() {
   textAlign(CENTER, CENTER); // 横に中央揃え ＆ 縦にも中央揃え
   text("RESULT", width / 2, height / 2); // 画面中央にテキスト表示
   text("Tap to restart",width / 2, height / 4);
+  text("イラスト　いらすとや　様\n 効果音　魔王魂　様",canvasx-50,canvasy-30);
   //result=((30*30)*flowers.length)/(canvasx*canvasy)*100;    
     result=(flowers.length/SEED)*100;
     textSize(35);
