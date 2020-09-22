@@ -54,7 +54,7 @@ function move(){
   }
   vx+=x;
   vy+=y;
-  image(image1,vx,vy,110,110);
+  image(image1,vx,vy,110,154);
   
 }
 
@@ -181,7 +181,7 @@ function playgame(){
         }
         
     }
-    text("残りのタネ:"+SEEDNUM,60,10);
+    text("残りの灰:"+SEEDNUM,60,10);
     for(let i=0;i<seeds.length;i++) seeds[i].draw();
     for(let i=0;i<flowers.length;i++) flowers[i].draw(image2);
     //text("flowernum:"+flowers.length,101,50);
