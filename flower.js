@@ -67,7 +67,7 @@ function drawResultScreen() {
   textAlign(CENTER, CENTER); // 横に中央揃え ＆ 縦にも中央揃え
   text("RESULT", width / 2, height / 2); // 画面中央にテキスト表示
   text("Tap to restart",width / 2, height / 4);
-   textSize(10); 
+   textSize(15); 
  text("イラスト　いらすとや　様\n 音楽　魔王魂　様",canvasx-100,canvasy-30);
   //result=((30*30)*flowers.length)/(canvasx*canvasy)*100;    
     result=(flowers.length/SEED)*100;
@@ -184,7 +184,7 @@ function playgame(){
         }
         
     }
-    text("残りの灰:"+SEEDNUM,60,10);
+    text("残りの灰:"+SEEDNUM,60,5);
     for(let i=0;i<seeds.length;i++) seeds[i].draw();
     for(let i=0;i<flowers.length;i++) flowers[i].draw(image2);
     //text("flowernum:"+flowers.length,101,50);
