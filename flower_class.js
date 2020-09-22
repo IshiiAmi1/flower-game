@@ -36,6 +36,6 @@ class flower{
     }
     draw(flowerimage){
         this.image=flowerimage;
-        image(this.image,this.x,this.y,50,70);
+        image(this.image,this.x,this.y,30,30);
     }
 }
