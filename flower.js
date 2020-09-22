@@ -54,7 +54,7 @@ function move(){
   }
   vx+=x;
   vy+=y;
-  image(image1,vx,vy,75,105);
+  image(image1,vx,vy,90,126);
   
 }
 
