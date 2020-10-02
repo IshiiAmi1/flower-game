@@ -68,7 +68,7 @@ function drawResultScreen() {
   text("RESULT", width / 2, height / 2); // 画面中央にテキスト表示
   text("Tap to restart",width / 2, height / 4);
    textSize(15); 
- text("桜・灰の絵　いらすとや　様\n音楽　    魔王魂   　様",canvasx-100,canvasy-30);
+ text("桜・灰の絵　いらすとや　様\n音楽　    魔王魂   　様\n製作者　　　しいa",canvasx-100,canvasy-30);
   //result=((30*30)*flowers.length)/(canvasx*canvasy)*100;    
     result=(flowers.length/SEED)*100;
     textSize(35);
@@ -86,7 +86,7 @@ function acievement(){
    
     textSize(20);
     if(flowers.length>=135){
-        text("天才！？桜がすごく沢山咲いた！",width/2,height/2+150);
+        text("天才！？桜がすごく沢山咲いた！\nキーワード\n「ふじのはな」",width/2,height/2+150);
     }else if(flowers.length<135 && flowers.length>=130){
          text("おめでとう！桜が沢山咲いた！",width/2,height/2+150);
     }else if(flowers.length<130 && flowers.length>=100){
